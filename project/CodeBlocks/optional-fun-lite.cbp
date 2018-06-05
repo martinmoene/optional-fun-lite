@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Optional Fun Lite" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="any-lite" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+			</Target>
+		</Build>
+		<Unit filename="../../.gitignore" />
+		<Unit filename="../../LICENSE" />
+		<Unit filename="../../include/nonstd/optional-fun.hpp" />
+		<Unit filename="../../test/CMakeLists.txt" />
+		<Unit filename="../../test/lest_cpp03.hpp" />
+		<Unit filename="../../test/optional-fun-lite.t.cpp" />
+		<Unit filename="../../test/optional-fun-lite.t.h" />
+		<Unit filename="../../test/optional-fun.t.cpp" />
+		<Unit filename="../../test/t-std.bat" />
+		<Unit filename="../../test/t.bat" />
+		<Unit filename="../../test/tg-all.bat" />
+		<Unit filename="../../test/tg-std.bat" />
+		<Unit filename="../../test/tg.bat" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
