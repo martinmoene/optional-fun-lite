@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Martin Moene
+// Copyright 2017-2018 by Martin Moene
 //
 // https://github.com/martinmoene/optional-fun-lite
 //
