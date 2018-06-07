@@ -12,7 +12,7 @@
 			</Target>
 		</Build>
 		<Unit filename="../../.gitignore" />
-		<Unit filename="../../LICENSE" />
+		<Unit filename="../../LICENSE.txt" />
 		<Unit filename="../../include/nonstd/optional-fun.hpp" />
 		<Unit filename="../../test/CMakeLists.txt" />
 		<Unit filename="../../test/lest_cpp03.hpp" />
