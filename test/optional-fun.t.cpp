@@ -8,7 +8,7 @@
 // - Simon Brand. Functional exceptionless error-handling with optional and expected. 30 November 2017.
 // - Vittorio Romeo. scelta: (experimental) Syntactic sugar for variant and optional types. GitHub
 
-#include "optional-fun-lite.t.h"
+#include "optional-fun-main.t.hpp"
 
 namespace {
 
@@ -33,7 +33,7 @@ CASE( "optional map(f): non-void" "[functional]")
 CASE( "optional map(f): void" "[functional]")
 {
     using nonstd::optfun_lite::monostate;
-    
+
     const int v = 21;
 
     EXPECT( monostate() == (optional<int>(v) | map( voider_int )).value() );

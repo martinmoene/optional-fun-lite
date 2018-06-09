@@ -12,12 +12,13 @@
 			</Target>
 		</Build>
 		<Unit filename="../../.gitignore" />
+		<Unit filename="../../CMakeLists.txt" />
 		<Unit filename="../../LICENSE.txt" />
 		<Unit filename="../../include/nonstd/optional-fun.hpp" />
 		<Unit filename="../../test/CMakeLists.txt" />
 		<Unit filename="../../test/lest_cpp03.hpp" />
-		<Unit filename="../../test/optional-fun-lite.t.cpp" />
-		<Unit filename="../../test/optional-fun-lite.t.h" />
+		<Unit filename="../../test/optional-fun-main.t.cpp" />
+		<Unit filename="../../test/optional-fun-main.t.h" />
 		<Unit filename="../../test/optional-fun.t.cpp" />
 		<Unit filename="../../test/t-std.bat" />
 		<Unit filename="../../test/t.bat" />
