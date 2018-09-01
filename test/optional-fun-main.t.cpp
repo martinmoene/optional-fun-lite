@@ -19,6 +19,14 @@ lest::tests & specification()
     return tests;
 }
 
+CASE( "optional-fun-lite version" "[.version]" )
+{
+    optfun_PRESENT( optional_fun_lite_MAJOR );
+    optfun_PRESENT( optional_fun_lite_MINOR );
+    optfun_PRESENT( optional_fun_lite_PATCH );
+    optfun_PRESENT( optional_fun_lite_VERSION );
+}
+
 CASE( "__cplusplus" "[.stdc++]" )
 {
     optfun_PRESENT( __cplusplus );
@@ -28,11 +36,6 @@ CASE( "__cplusplus" "[.stdc++]" )
 #else
     optfun_ABSENT(  _MSVC_LANG );
 #endif
-}
-
-CASE( "optional-fun-lite version" "[.version]" )
-{
-    optfun_PRESENT( optional_fun_lite_VERSION );
 }
 
 CASE( "optional-fun-lite configuration" "[.config]" )

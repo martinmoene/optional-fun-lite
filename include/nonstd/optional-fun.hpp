@@ -15,7 +15,14 @@
 #ifndef NONSTD_OPTIONAL_FUN_LITE_HPP
 #define NONSTD_OPTIONAL_FUN_LITE_HPP
 
-#define  optional_fun_lite_VERSION "0.1.0"
+#define optional_fun_lite_MAJOR  0
+#define optional_fun_lite_MINOR  1
+#define optional_fun_lite_PATCH  0
+
+#define optional_fun_lite_VERSION  optional_fun_STRINGIFY(optional_fun_lite_MAJOR) "." optional_fun_STRINGIFY(optional_fun_lite_MINOR) "." optional_fun_STRINGIFY(optional_fun_lite_PATCH)
+
+#define optional_fun_STRINGIFY(  x )  optional_fun_STRINGIFY_( x )
+#define optional_fun_STRINGIFY_( x )  #x
 
 // Configuration:
 
