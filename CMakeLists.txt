@@ -7,6 +7,10 @@
 
 cmake_minimum_required( VERSION 3.5 )
 
+# optional-fun-lite version, updated by script/update-version.py:
+
+set( optional_fun_lite_version "0.1.0" )
+
 # Enable building and performing of tests and building of examples:
 
 option( OPTIONAL_FUN_LITE_OPT_BUILD_TESTS    "Build and perform optional-fun-lite tests" ON )
