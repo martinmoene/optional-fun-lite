@@ -18,6 +18,8 @@ option( OPTIONAL_FUN_LITE_OPT_BUILD_EXAMPLES "Build optional-fun-lite examples" 
 
 project( optional-fun_lite LANGUAGES CXX )
 
+include( GNUInstallDirs )
+
 set( package_name "optional-fun-lite" )
 set( include_source_dir "${PROJECT_SOURCE_DIR}/include" )
 
@@ -28,6 +30,13 @@ add_library(
 
 target_include_directories(
     ${package_name} INTERFACE "$<BUILD_INTERFACE:${include_source_dir}>" )
+
+# Installation:
+
+install( 
+    DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} )
+
+# If requested, build and perform tests, build examples:
 
 enable_testing()
 
