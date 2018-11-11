@@ -436,10 +436,12 @@ using optfun_lite::operator|;
 // half-open range [lo..hi):
 #define optfun_BETWEEN( v, lo, hi ) ( lo <= v && v < hi )
 
-#if defined(_MSC_VER) && !defined(__clang__)
-# define optfun_COMPILER_MSVC_VERSION   (_MSC_VER / 100 - 5 - (_MSC_VER < 1900))
+#if defined(_MSC_VER ) && !defined(__clang__)
+# define optfun_COMPILER_MSVC_VER      (_MSC_VER )
+# define optfun_COMPILER_MSVC_VERSION  (_MSC_VER / 10 - 10 * ( 5 + (_MSC_VER < 1900 ) ) )
 #else
-# define optfun_COMPILER_MSVC_VERSION   0
+# define optfun_COMPILER_MSVC_VER      0
+# define optfun_COMPILER_MSVC_VERSION  0
 #endif
 
 #if defined(__GNUC__) && !defined(__clang__)
@@ -448,30 +450,30 @@ using optfun_lite::operator|;
 # define optfun_COMPILER_GNUC_VERSION    0
 #endif
 
-#if optfun_BETWEEN(optfun_COMPILER_MSVC_VERSION, 7, 14 )
+#if optfun_BETWEEN(optfun_COMPILER_MSVC_VERSION, 70, 140 )
 # pragma warning( push )
 # pragma warning( disable: 4345 )   // initialization behavior changed
 #endif
 
-#if optfun_BETWEEN(optfun_COMPILER_MSVC_VERSION, 7, 15 )
+#if optfun_BETWEEN(optfun_COMPILER_MSVC_VERSION, 70, 150 )
 # pragma warning( push )
 # pragma warning( disable: 4814 )   // in C++14 'constexpr' will not imply 'const'
 #endif
 
 // Presence of C++11 language features:
 
-#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 10
+#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 100
 # define optfun_HAVE_AUTO  1
 # define optfun_HAVE_NULLPTR  1
 # define optfun_HAVE_STATIC_ASSERT  1
 #endif
 
-#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 12
+#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 120
 # define optfun_HAVE_DEFAULT_FUNCTION_TEMPLATE_ARG  1
 # define optfun_HAVE_INITIALIZER_LIST  1
 #endif
 
-#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 14
+#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 140
 # define optfun_HAVE_ALIAS_TEMPLATE  1
 # define optfun_HAVE_CONSTEXPR_11  1
 # define optfun_HAVE_ENUM_CLASS  1
@@ -494,7 +496,7 @@ using optfun_lite::operator|;
 
 // For the rest, consider VC14 as C++11 for optional-lite:
 
-//#if      optfun_COMPILER_MSVC_VERSION >= 14
+//#if      optfun_COMPILER_MSVC_VERSION >= 140
 //# undef  optfun_CPP11_OR_GREATER
 //# define optfun_CPP11_OR_GREATER  1
 //#endif
