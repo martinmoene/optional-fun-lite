@@ -434,7 +434,7 @@ using optfun_lite::operator|;
 //
 
 // half-open range [lo..hi):
-#define optfun_BETWEEN( v, lo, hi ) ( lo <= v && v < hi )
+#define optfun_BETWEEN( v, lo, hi ) ( (lo) <= (v) && (v) < (hi) )
 
 #if defined(_MSC_VER ) && !defined(__clang__)
 # define optfun_COMPILER_MSVC_VER      (_MSC_VER )
