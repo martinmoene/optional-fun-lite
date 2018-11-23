@@ -7,16 +7,24 @@
 
 cmake_minimum_required( VERSION 3.5 )
 
-# optional-fun-lite version, updated by script/update-version.py:
+# optional-fun-lite project and version, updated by script/update-version.py:
+
+project( optional-fun_lite LANGUAGES CXX )
 
 set( optional_fun_lite_version "0.1.0" )
 
+# Toplevel or subproject:
+
+if ( CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR )
+    set( optional_fun_IS_TOPLEVEL_PROJECT TRUE )
+else()
+    set( optional_fun_IS_TOPLEVEL_PROJECT FALSE )
+endif()
+
 # Enable building and performing of tests and building of examples:
 
-option( OPTIONAL_FUN_LITE_OPT_BUILD_TESTS    "Build and perform optional-fun-lite tests" ON )
+option( OPTIONAL_FUN_LITE_OPT_BUILD_TESTS    "Build and perform optional-fun-lite tests" ${optional_fun_IS_TOPLEVEL_PROJECT} )
 option( OPTIONAL_FUN_LITE_OPT_BUILD_EXAMPLES "Build optional-fun-lite examples" OFF )
-
-project( optional-fun_lite LANGUAGES CXX )
 
 include( GNUInstallDirs )
 
