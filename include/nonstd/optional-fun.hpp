@@ -374,7 +374,7 @@ struct and_
 {
     U const & u;
 
-    and_( U u_ )
+    and_( U const & u_ )
     : u( u_ ) {}
 
     template< typename T >
@@ -397,7 +397,7 @@ struct or_
 {
     U const & u;
 
-    or_( U u_ )
+    or_( U const & u_ )
     : u( u_ ) {}
 
     template< typename T >
