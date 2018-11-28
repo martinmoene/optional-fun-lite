@@ -1,19 +1,20 @@
 @echo off & setlocal enableextensions enabledelayedexpansion
 ::
-:: tg.bat - compile & run tests (GNUC).
+:: tc.bat - compile & run tests (clang).
 ::
 
 set      unit=optional_fun
 set unit_file=optional-fun
 
-:: if no std is given, use c++11
+:: if no std is given, use c++14
 
 set std=%1
-set args=%2 %3 %4 %5 %6 %7 %8 %9
-if "%1" == "" set std=c++11
+if "%std%"=="" set std=c++14
+
+set  clang=clang
 
 call :CompilerVersion version
-echo g++ %version%: %std% %args%
+echo clang %version%: %std%
 
 set UCAP=%unit%
 call :toupper UCAP
@@ -27,11 +28,9 @@ set unit_config=^
 
 rem -flto / -fwhole-program
 set  optflags=-O2
-set warnflags=-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Wno-padded -Wno-missing-noreturn
-set       gpp=g++
+set warnflags=-Wall -Wextra -Wpedantic -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded -Wno-missing-noreturn -Wno-documentation-unknown-command -Wno-documentation-deprecated-sync -Wno-documentation -Wno-weak-vtables -Wno-missing-prototypes -Wno-missing-variable-declarations -Wno-exit-time-destructors -Wno-global-constructors
 
-%gpp% -std=%std% %optflags% %warnflags% %unit_select% %unit_config% -o %unit_file%-main.t.exe -I../include/nonstd %unit_file%-main.t.cpp %unit_file%.t.cpp && %unit_file%-main.t.exe
-
+"%clang%" -m32 -std=%std% %optflags% %warnflags% %unit_select% %unit_config% -fms-compatibility-version=19.00 -isystem "%VCInstallDir%include" -isystem "%WindowsSdkDir_71A%include" -I../include/nonstd -o %unit_file%-main.t.exe %unit_file%-main.t.cpp %unit_file%.t.cpp && %unit_file%-main.t.exe
 endlocal & goto :EOF
 
 :: subroutines:
@@ -42,14 +41,14 @@ set tmpprogram=_getcompilerversion.tmp
 set tmpsource=%tmpprogram%.c
 
 echo #include ^<stdio.h^>     > %tmpsource%
-echo int main(){printf("%%d.%%d.%%d\n",__GNUC__,__GNUC_MINOR__,__GNUC_PATCHLEVEL__);} >> %tmpsource%
+echo int main(){printf("%%d.%%d.%%d\n",__clang_major__,__clang_minor__,__clang_patchlevel__);} >> %tmpsource%
 
-g++ -o %tmpprogram% %tmpsource% >nul
+"%clang%" -m32 -o %tmpprogram% %tmpsource% >nul
 for /f %%x in ('%tmpprogram%') do set version=%%x
 del %tmpprogram%.* >nul
 endlocal & set %1=%version%& goto :EOF
 
-:: toupper; makes use of the fact that string
+:: toupper; makes use of the fact that string 
 :: replacement (via SET) is not case sensitive
 :toupper
 for %%L IN (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) DO SET %1=!%1:%%L=%%L!
