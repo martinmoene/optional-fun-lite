@@ -10,14 +10,16 @@
 
 #include "optional-fun-main.t.hpp"
 
+using namespace nonstd;
+
 namespace {
 
 //
 // Functional extension:
 //
 
-int  double_int( int arg ) { return 2 * arg; }
-void voider_int( int arg ) {}
+int  double_int( int   arg   ) { return 2 * arg; }
+void voider_int( int /*arg*/ ) {}
 
 CASE( "optional map(f): non-void" "[functional]")
 {
@@ -57,8 +59,8 @@ CASE( "optional map_or_else(f): " "[functional]")
     EXPECT(  7 == (optional<int>(   ) | map_or_else( double_int, seven )) );
 }
 
-optional<int> double_opt( int arg ) { return 2 * arg; }
-optional<int> fail_opt  ( int arg ) { return nullopt; }
+optional<int> double_opt( int   arg   ) { return 2 * arg; }
+optional<int> fail_opt  ( int /*arg*/ ) { return nullopt; }
 
 CASE( "optional and_then(f): success" "[functional]")
 {

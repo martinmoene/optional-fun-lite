@@ -14,8 +14,6 @@
 #include "optional-fun.hpp"
 #include "lest_cpp03.hpp"
 
-using namespace nonstd;
-
 #define CASE( name ) lest_CASE( specification(), name )
 
 extern lest::tests & specification();

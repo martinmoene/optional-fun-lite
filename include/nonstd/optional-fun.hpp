@@ -39,23 +39,6 @@
 #ifndef optfun_CONFIG_USE_STD_OPTIONAL
 #endif
 
-// Detect kind of optional used, unless specified via configuration:
-
-#if ! (defined( optfun_CONFIG_USE_OWN_OPTIONAL   ) || \
-       defined( optfun_CONFIG_USE_BOOST_OPTIONAL ) || \
-       defined( optfun_CONFIG_USE_STD_OPTIONAL   ) )
-
-#if defined( optional_lite_VERSION )
-# define optfun_USES_OPTIONAL_LITE  1
-#elif defined( BOOST_OPTIONAL_OPTIONAL_FLC_19NOV2002_HPP )
-# define optfun_USES_BOOST_OPTIONAL  1
-# include <boost/none.hpp>
-# include <boost/optional/bad_optional_access.hpp>
-#else
-# define optfun_USES_STD_OPTIONAL  1
-#endif
-#endif
-
 // C++ language version detection (C++20 is speculative):
 // Note: VC14.0/1900 (VS2015) lacks too much from C++14.
 
@@ -72,6 +55,31 @@
 #define optfun_CPP14_OR_GREATER  ( optfun_CPLUSPLUS >= 201402L )
 #define optfun_CPP17_OR_GREATER  ( optfun_CPLUSPLUS >= 201703L )
 #define optfun_CPP20_OR_GREATER  ( optfun_CPLUSPLUS >= 202000L )
+
+// Detect kind of optional used, unless specified via configuration:
+
+#if ! (defined( optfun_CONFIG_USE_OWN_OPTIONAL   ) || \
+       defined( optfun_CONFIG_USE_BOOST_OPTIONAL ) || \
+       defined( optfun_CONFIG_USE_STD_OPTIONAL   ) )
+
+#if defined( optional_lite_VERSION )
+# define optfun_USES_OPTIONAL_LITE   1
+# define optfun_USES_BOOST_OPTIONAL  0
+# define optfun_USES_STD_OPTIONAL    0
+#elif defined( BOOST_OPTIONAL_OPTIONAL_FLC_19NOV2002_HPP )
+# define optfun_USES_OPTIONAL_LITE   0
+# define optfun_USES_BOOST_OPTIONAL  1
+# define optfun_USES_STD_OPTIONAL    0
+# include <boost/none.hpp>
+# include <boost/optional/bad_optional_access.hpp>
+#elif optfun_CPP17_OR_GREATER
+# define optfun_USES_OPTIONAL_LITE   0
+# define optfun_USES_BOOST_OPTIONAL  0
+# define optfun_USES_STD_OPTIONAL    1
+#else
+//# error None of std::optional, boost::optional or nonstd::optional requested
+#endif
+#endif
 
 // optonal functional extensions in three parts:
 // 1. nudge optional, common to all language versions
@@ -444,8 +452,18 @@ using optfun_lite::operator|;
 // 3. Before C++17
 //
 
-// half-open range [lo..hi):
-#define optfun_BETWEEN( v, lo, hi ) ( (lo) <= (v) && (v) < (hi) )
+// Compiler versions:
+//
+// MSVC++ 6.0  _MSC_VER == 1200 (Visual Studio 6.0)
+// MSVC++ 7.0  _MSC_VER == 1300 (Visual Studio .NET 2002)
+// MSVC++ 7.1  _MSC_VER == 1310 (Visual Studio .NET 2003)
+// MSVC++ 8.0  _MSC_VER == 1400 (Visual Studio 2005)
+// MSVC++ 9.0  _MSC_VER == 1500 (Visual Studio 2008)
+// MSVC++ 10.0 _MSC_VER == 1600 (Visual Studio 2010)
+// MSVC++ 11.0 _MSC_VER == 1700 (Visual Studio 2012)
+// MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013)
+// MSVC++ 14.0 _MSC_VER == 1900 (Visual Studio 2015)
+// MSVC++ 14.1 _MSC_VER >= 1910 (Visual Studio 2017)
 
 #if defined(_MSC_VER ) && !defined(__clang__)
 # define optfun_COMPILER_MSVC_VER      (_MSC_VER )
@@ -455,11 +473,22 @@ using optfun_lite::operator|;
 # define optfun_COMPILER_MSVC_VERSION  0
 #endif
 
-#if defined(__GNUC__) && !defined(__clang__)
-# define optfun_COMPILER_GNUC_VERSION  __GNUC__
+#define optfun_COMPILER_VERSION( major, minor, patch )  ( 10 * ( 10 * (major) + (minor) ) + (patch) )
+
+#if defined(__clang__)
+# define optfun_COMPILER_CLANG_VERSION  optfun_COMPILER_VERSION(__clang_major__, __clang_minor__, __clang_patchlevel__)
 #else
-# define optfun_COMPILER_GNUC_VERSION    0
+# define optfun_COMPILER_CLANG_VERSION  0
 #endif
+
+#if defined(__GNUC__) && !defined(__clang__)
+# define optfun_COMPILER_GNUC_VERSION  optfun_COMPILER_VERSION(__GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__)
+#else
+# define optfun_COMPILER_GNUC_VERSION  0
+#endif
+
+// half-open range [lo..hi):
+#define optfun_BETWEEN( v, lo, hi ) ( (lo) <= (v) && (v) < (hi) )
 
 #if optfun_BETWEEN(optfun_COMPILER_MSVC_VERSION, 70, 140 )
 # pragma warning( push )
@@ -471,48 +500,34 @@ using optfun_lite::operator|;
 # pragma warning( disable: 4814 )   // in C++14 'constexpr' will not imply 'const'
 #endif
 
+// Presence of language and library features:
+
+#ifdef _HAS_CPP0X
+# define optfun_HAS_CPP0X  _HAS_CPP0X
+#else
+# define optfun_HAS_CPP0X  0
+#endif
+
+#define optfun_CPP11_140  (optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VER >= 1900)
+
+#define optfun_CPP14_000  (optfun_CPP14_OR_GREATER)
+#define optfun_CPP17_000  (optfun_CPP17_OR_GREATER)
+
 // Presence of C++11 language features:
 
-#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 100
-# define optfun_HAVE_AUTO  1
-# define optfun_HAVE_NULLPTR  1
-# define optfun_HAVE_STATIC_ASSERT  1
-#endif
-
-#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 120
-# define optfun_HAVE_DEFAULT_FUNCTION_TEMPLATE_ARG  1
-# define optfun_HAVE_INITIALIZER_LIST  1
-#endif
-
-#if optfun_CPP11_OR_GREATER || optfun_COMPILER_MSVC_VERSION >= 140
-# define optfun_HAVE_ALIAS_TEMPLATE  1
-# define optfun_HAVE_CONSTEXPR_11  1
-# define optfun_HAVE_ENUM_CLASS  1
-# define optfun_HAVE_EXPLICIT_CONVERSION  1
-# define optfun_HAVE_IS_DEFAULT  1
-# define optfun_HAVE_IS_DELETE  1
-# define optfun_HAVE_NOEXCEPT  1
-# define optfun_HAVE_REF_QUALIFIER  1
-#endif
+#define optfun_HAVE_CONSTEXPR_11            optfun_CPP11_140
+#define optfun_HAVE_NOEXCEPT                optfun_CPP11_140
+#define optfun_HAVE_REF_QUALIFIER           optfun_CPP11_140
 
 // Presence of C++14 language features:
 
-#if optfun_CPP14_OR_GREATER
-# define optfun_HAVE_CONSTEXPR_14  1
-#endif
+#define optfun_HAVE_CONSTEXPR_14            optfun_CPP14_000
 
 // Presence of C++17 language features:
 
 // ...
 
-// For the rest, consider VC14 as C++11 for optional-lite:
-
-//#if      optfun_COMPILER_MSVC_VERSION >= 140
-//# undef  optfun_CPP11_OR_GREATER
-//# define optfun_CPP11_OR_GREATER  1
-//#endif
-
-// C++ feature usage:
+// Presence of C++ language features:
 
 #if      optfun_HAVE_CONSTEXPR_11
 # define optfun_constexpr  constexpr
