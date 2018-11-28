@@ -56,11 +56,22 @@
 #endif
 #endif
 
-// Compiler detection:
+// C++ language version detection (C++20 is speculative):
+// Note: VC14.0/1900 (VS2015) lacks too much from C++14.
 
-#define optfun_CPP11_OR_GREATER  ( __cplusplus >= 201103L )
-#define optfun_CPP14_OR_GREATER  ( __cplusplus >= 201402L /* || _MSVC_LANG >= 201402L */ )
-#define optfun_CPP17_OR_GREATER  ( __cplusplus >= 201703L    || _MSVC_LANG >= 201703L    )
+#ifndef   optfun_CPLUSPLUS
+# if defined(_MSVC_LANG ) && !defined(__clang__)
+#  define optfun_CPLUSPLUS  (_MSC_VER == 1900 ? 201103L : _MSVC_LANG )
+# else
+#  define optfun_CPLUSPLUS  __cplusplus
+# endif
+#endif
+
+#define optfun_CPP98_OR_GREATER  ( optfun_CPLUSPLUS >= 199711L )
+#define optfun_CPP11_OR_GREATER  ( optfun_CPLUSPLUS >= 201103L )
+#define optfun_CPP14_OR_GREATER  ( optfun_CPLUSPLUS >= 201402L )
+#define optfun_CPP17_OR_GREATER  ( optfun_CPLUSPLUS >= 201703L )
+#define optfun_CPP20_OR_GREATER  ( optfun_CPLUSPLUS >= 202000L )
 
 // optonal functional extensions in three parts:
 // 1. nudge optional, common to all language versions
