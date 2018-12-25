@@ -9,9 +9,14 @@ cmake_minimum_required( VERSION 3.5 )
 
 # optional-fun-lite project and version, updated by script/update-version.py:
 
-project( optional-fun_lite LANGUAGES CXX )
+project(
+    optional_fun_lite
+    VERSION 0.1.0
+    DESCRIPTION "Functional algorithms for optional (lite) for C++98, C++11 and later in a single-file header-only library"
+#   HOMEPAGE_URL "https://github.com/martinmoene/optional-fun-litee"
+    LANGUAGES CXX )
 
-set( optional_fun_lite_version "0.1.0" )
+set( ${PROJECT_NAME}_version "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}" )
 
 # Toplevel or subproject:
 
@@ -21,7 +26,7 @@ else()
     set( optional_fun_IS_TOPLEVEL_PROJECT FALSE )
 endif()
 
-# Enable building and performing of tests and building of examples:
+# If toplevel project, enable building and performing of tests, disable building of examples:
 
 option( OPTIONAL_FUN_LITE_OPT_BUILD_TESTS    "Build and perform optional-fun-lite tests" ${optional_fun_IS_TOPLEVEL_PROJECT} )
 option( OPTIONAL_FUN_LITE_OPT_BUILD_EXAMPLES "Build optional-fun-lite examples" OFF )
@@ -41,7 +46,7 @@ target_include_directories(
 
 # Installation:
 
-install( 
+install(
     DIRECTORY ${CMAKE_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} )
 
 # If requested, build and perform tests, build examples:
