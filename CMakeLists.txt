@@ -12,7 +12,7 @@ cmake_minimum_required( VERSION 3.5 )
 project(
     optional_fun_lite
     VERSION 0.1.0
-    DESCRIPTION "Functional algorithms for optional (lite) for C++98, C++11 and later in a single-file header-only library"
+#   DESCRIPTION "Functional algorithms for optional (lite) for C++98, C++11 and later in a single-file header-only library"
 #   HOMEPAGE_URL "https://github.com/martinmoene/optional-fun-litee"
     LANGUAGES CXX )
 
