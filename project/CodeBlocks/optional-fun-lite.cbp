@@ -14,6 +14,7 @@
 		<Unit filename="../../.gitignore" />
 		<Unit filename="../../CMakeLists.txt" />
 		<Unit filename="../../LICENSE.txt" />
+		<Unit filename="../../cmake/optional-fun-lite-config.cmake.in" />
 		<Unit filename="../../include/nonstd/optional-fun.hpp" />
 		<Unit filename="../../script/update-version.py" />
 		<Unit filename="../../test/CMakeLists.txt" />
