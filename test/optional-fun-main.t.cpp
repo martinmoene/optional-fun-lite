@@ -83,15 +83,15 @@ int main( int argc, char * argv[] )
 }
 
 #if 0
-g++            -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
-g++ -std=c++98 -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
-g++ -std=c++03 -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
-g++ -std=c++0x -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
-g++ -std=c++11 -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
-g++ -std=c++14 -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
-g++ -std=c++17 -I../include/nonstd -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++            -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++ -std=c++98 -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++ -std=c++03 -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++ -std=c++0x -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++ -std=c++11 -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++ -std=c++14 -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+g++ -std=c++17 -I../include -o optional-fun-lite.t.exe optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
 
-cl -EHsc -I../include/nonstd optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
+cl -EHsc -I../include optional-fun-lite.t.cpp && optional-fun-lite.t.exe --pass
 #endif
 
 // end of file

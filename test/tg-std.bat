@@ -5,4 +5,4 @@
 set optional=^<optional^>
 set include=""
 
-g++ -std=c++17 -O2 -Wall -Wextra -Wno-unused-parameter -Doptfun_OPTIONAL_HEADER="%optional%" -I"%include%" -o optional-fun-main.t.exe -I../include/nonstd optional-fun-main.t.cpp optional-fun.t.cpp && optional-fun-main.t.exe
+g++ -std=c++17 -O2 -Wall -Wextra -Wno-unused-parameter -Doptfun_OPTIONAL_HEADER="%optional%" -I"%include%" -o optional-fun-main.t.exe -I../include optional-fun-main.t.cpp optional-fun.t.cpp && optional-fun-main.t.exe
