@@ -114,7 +114,7 @@ install(
 )
 
 install(
-    DIRECTORY   "${CMAKE_SOURCE_DIR}/include"
+    DIRECTORY   "${CMAKE_SOURCE_DIR}/include/"
     DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
