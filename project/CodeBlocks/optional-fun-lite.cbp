@@ -17,6 +17,7 @@
 		<Unit filename="../../cmake/optional-fun-lite-config.cmake.in" />
 		<Unit filename="../../include/nonstd/optional-fun.hpp" />
 		<Unit filename="../../script/update-version.py" />
+		<Unit filename="../../script/upload-conan.py" />
 		<Unit filename="../../test/CMakeLists.txt" />
 		<Unit filename="../../test/lest_cpp03.hpp" />
 		<Unit filename="../../test/optional-fun-main.t.cpp" />
