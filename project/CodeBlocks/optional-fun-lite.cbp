@@ -16,6 +16,7 @@
 		<Unit filename="../../LICENSE.txt" />
 		<Unit filename="../../cmake/optional-fun-lite-config.cmake.in" />
 		<Unit filename="../../include/nonstd/optional-fun.hpp" />
+		<Unit filename="../../script/create-cov-rpt.py" />
 		<Unit filename="../../script/create-vcpkg.py" />
 		<Unit filename="../../script/update-version.py" />
 		<Unit filename="../../script/upload-conan.py" />
