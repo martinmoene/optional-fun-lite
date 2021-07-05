@@ -3,8 +3,8 @@
 :: tc-cl.bat - compile & run tests (clang-cl).
 ::
 
-set      unit=optional-fun
-set unit_file=%unit%
+set      unit=optional_fun
+set unit_file=optional-fun
 
 :: if no std is given, use c++14
 
@@ -26,7 +26,7 @@ call :CompilerVersion version
 echo %clang% %version%: %std% %unit_select% %args%
 
 set unit_config=^
-    -D%unit%_%UCAP%_HEADER=\"nonstd/%unit%.hpp\" ^
+    -Doptfun_OPTIONAL_HEADER=\"../../optional-lite/include/nonstd/optional.hpp\" ^
     -D%unit%_TEST_NODISCARD=0 ^
     -D%unit%_CONFIG_SELECT_%UCAP%=%unit_select%
 
