@@ -39,7 +39,7 @@
 #ifndef optfun_CONFIG_USE_STD_OPTIONAL
 #endif
 
-// C++ language version detection (C++20 is speculative):
+// C++ language version detection (C++23 is speculative):
 // Note: VC14.0/1900 (VS2015) lacks too much from C++14.
 
 #ifndef   optfun_CPLUSPLUS
@@ -54,7 +54,8 @@
 #define optfun_CPP11_OR_GREATER  ( optfun_CPLUSPLUS >= 201103L )
 #define optfun_CPP14_OR_GREATER  ( optfun_CPLUSPLUS >= 201402L )
 #define optfun_CPP17_OR_GREATER  ( optfun_CPLUSPLUS >= 201703L )
-#define optfun_CPP20_OR_GREATER  ( optfun_CPLUSPLUS >= 202000L )
+#define optfun_CPP20_OR_GREATER  ( optfun_CPLUSPLUS >= 202002L )
+#define optfun_CPP23_OR_GREATER  ( optfun_CPLUSPLUS >= 202300L )
 
 // Detect kind of optional used, unless specified via configuration:
 
