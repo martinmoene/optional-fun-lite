@@ -112,7 +112,7 @@ Define this to 1 if you want to compile without exceptions. If not defined, the 
 
 ## Other implementations
 
-- [optional]([url](https://github.com/TartanLlama/optional)). C++11/14/17 std::optional with functional-style extensions and reference support. Simon Brand.
+- [optional](https://github.com/TartanLlama/optional). C++11/14/17 std::optional with functional-style extensions and reference support. Simon Brand.
 
 ## Notes and references
 
